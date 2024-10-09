@@ -1,6 +1,4 @@
 
-from calendar import c
-from flask import jsonify
 from app.models.post import Post
 
 

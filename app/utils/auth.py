@@ -1,9 +1,8 @@
 
 from abc import ABC, abstractmethod
-import stat
 
 from flask_jwt_extended import create_access_token
-from app import bcrypt, jwt
+from app import bcrypt
 from app.models.user import User
 
 class BaseAuthentication(ABC):

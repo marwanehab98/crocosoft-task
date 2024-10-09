@@ -1,9 +1,6 @@
-import queue
 from typing import Optional
 from app import db
 from sqlalchemy import text
-
-from app.models import user
 
 class Post():
     def __init__(self, user_id: int, post_id: Optional[int] = None, content: Optional[str] = None):
