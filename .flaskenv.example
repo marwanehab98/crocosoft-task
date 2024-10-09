@@ -1,0 +1,5 @@
+FLASK_APP=croconews.py
+SECRET_KEY=secret
+JWT_SECRET_KEY=jwt-secret
+JWT_TOKEN_LOCATION=headers
+DATABASE_URL=mysql+pymysql://root:password@localhost:port/db_name
