@@ -18,7 +18,7 @@ class Post():
         return '<Post %r>' % self.content
     
     def __eq__(self, other):
-        return self.content == other.content
+        return self.post_id == other.post_id
     
     def find_by_id(self):
         query = text('SELECT * FROM Post WHERE post_id = :post_id AND deleted_at IS NULL')

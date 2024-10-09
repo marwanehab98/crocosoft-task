@@ -17,7 +17,7 @@ class User():
         return '<User %r>' % self.username
     
     def __eq__(self, other):
-        return self.username == other.username
+        return self.user_id == other.user_id
     
     def find_by_email(self):
         result = db.session.execute(text('SELECT * FROM User WHERE email = :email'), {'email': self.email})
