@@ -19,4 +19,4 @@ There are endpoints for registration and login. You can use the following endpoi
 * an endpoint to register user at `/register` with the `POST` method
 * an endpoint to login user at `/login` with the `POST` method
 
-### The post endpoints are protected by JWT token.
+### The post endpoints are protected by JWT authentication.
