@@ -11,6 +11,4 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-print(Config.SQLALCHEMY_DATABASE_URI)
-
 from app.routes import auth, post
