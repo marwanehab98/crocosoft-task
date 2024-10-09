@@ -14,7 +14,7 @@
 * an endpoint to get post at `/post/{post_id}` with the `GET` method
 
 # Important Notes
-There are endpoints for registration and login. You can use the following endpoints to register and login
+### There are endpoints for registration and login. You can use the following endpoints to register and login
 
 * an endpoint to register user at `/register` with the `POST` method
 * an endpoint to login user at `/login` with the `POST` method
