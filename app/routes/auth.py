@@ -10,7 +10,7 @@ def login():
         email = body['email']
         password = body['password']
         
-        user = User(email=email, password=password, username=None, user_id=None)
+        user = User(email=email, password=password)
         auth_service = auth.EmailPasswordAuthentication(user)
         response = auth_service.login()
         
@@ -27,7 +27,7 @@ def register():
         password = body['password']
         username = body['username']
         
-        user = User(username=username, password=password, email=email, user_id=None)
+        user = User(username=username, password=password, email=email)
         auth_service = auth.EmailPasswordAuthentication(user)
         response = auth_service.register()
         

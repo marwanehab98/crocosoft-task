@@ -18,10 +18,18 @@ class EmailPasswordAuthentication(BaseAuthentication):
     def __init__(self, user: User):
         self.user = user
         
-    def register(self):
+    def register(self) -> dict:
+        if not self.user.username or not self.user.email or not self.user.password:
+            return { 'message': 'missing data', 'status': 402 }
+        
+        if self.user.find_by_email():
+            return { 'message': 'email already exists', 'status': 403 }
+        
         hashedPassword = bcrypt.generate_password_hash(self.user.password)
         self.user.password = hashedPassword
-        result = self.user.create_user()
+        self.user.create_user()
+        
+        result = { 'message': 'user created successfully', 'status': 201 }
         
         return result
         

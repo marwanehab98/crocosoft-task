@@ -3,6 +3,7 @@ from app import app
 from flask import jsonify, request
 
 from app.models.post import Post
+from app.utils.post import PostService
     
 @app.route('/post', methods=['POST'])
 @jwt_required()
@@ -12,8 +13,9 @@ def post():
         content = body['content']
         user_id = get_jwt_identity()
         
-        post = Post(user_id=user_id, content=content, post_id=None)
-        response = post.create_post()
+        post = Post(user_id=user_id, content=content)
+        post_service = PostService(post=post)
+        response = post_service.create_post()
         
         return jsonify(response), response['status']
         
@@ -28,13 +30,11 @@ def post_id(post_id):
         user_id = get_jwt_identity()
         
         if request.method == 'GET':
-            post = Post(post_id=post_id, user_id=user_id, content=None)
-            response = post.find_by_id()
+            post = Post(post_id=post_id, user_id=user_id)
+            post_service = PostService(post=post)
+            response = post_service.get_post()
             
-            if response is None:
-                return { 'message': 'post does not exist', 'status': 404 }, 404
-            
-            return jsonify(response), response['status']
+            return jsonify(response), response['status'], 
         
         elif request.method == 'PUT':
             body = request.get_json()
@@ -42,13 +42,15 @@ def post_id(post_id):
             user_id = get_jwt_identity()
             
             post = Post(user_id=user_id, content=new_content, post_id=post_id)
-            response = post.edit_post()
+            post_service = PostService(post=post)
+            response = post_service.edit_post()
             
             return jsonify(response), response['status']
             
         elif request.method == 'DELETE':
-            post = Post(user_id=user_id, post_id=post_id, content=None)
-            response = post.delete_post()
+            post = Post(user_id=user_id, post_id=post_id)
+            post_service = PostService(post=post)
+            response = post_service.delete_post()
             
             return jsonify(response), response['status']
             

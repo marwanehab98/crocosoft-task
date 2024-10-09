@@ -1,10 +1,10 @@
 
-from flask import jsonify
+from typing import Optional
 from sqlalchemy import text
 from app import db
 
 class User():
-    def __init__(self, user_id, username, password, email):
+    def __init__(self, email: str, password: str, user_id: Optional[int] = None, username: Optional[str] = None):
         self.user_id = user_id
         self.username = username
         self.password = password
@@ -46,16 +46,6 @@ class User():
         return user
     
     def create_user(self):
-        if not self.username or not self.email or not self.password:
-            return { 'message': 'missing data', 'status': 402 }
-        
-        if self.find_by_email():
-            return { 'message': 'email already exists', 'status': 403 }
-        
         query = text('INSERT INTO User (username, email, password) VALUES (:username, :email, :password)')
         db.session.execute(query, {'username': self.username, 'email': self.email, 'password': self.password})
         db.session.commit()
-        
-        result = { 'message': 'user created successfully', 'status': 201 }
-        
-        return result
